@@ -1,0 +1,73 @@
+/* Custom CSS Variables and Styles for Event Hoki Talas89 */
+
+:root {
+    /* Color Variables */
+    --background-color: linear-gradient(135deg, #142a0e 0%, #1f3f16 25%, #2a5420 50%, #142a0e 75%, #1f3f16 100%);
+    --text-color: #ffffff;
+    --header-text-color: #488c2c;
+    --button-background-color: linear-gradient(145deg, #488c2c 0%, #6ba942 50%, #4a7a2f 100%);
+    --button-text-color: #ffffff;
+    --font-family: 'Arial', 'Helvetica', sans-serif;
+    
+    /* Theme Variables */
+    --enable-dark-mode: 'true';
+}
+
+/* Font Awesome Icon Fixes */
+.fas, .fa {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+}
+
+/* Ensure Font Awesome icons are visible */
+.btn .fas, .btn .fa {
+    margin-right: 8px;
+    font-size: 16px;
+}
+
+/* Button icon styling */
+.btn-danger .fas {
+    color: #ffffff;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+.btn-primary .fas {
+    color: #ffffff;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+.btn-info .fas {
+    color: #ffffff;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+/* Additional styling for better icon visibility */
+h2 .fas, h3 .fas {
+    margin-right: 10px;
+    color: #488c2c;
+}
+
+/* Modal content icons */
+.rules-content .fas {
+    color: #488c2c;
+    margin-right: 8px;
+}
+
+/* Prize display icons */
+.prize-display .fas {
+    color: #488c2c;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+/* Congratulations modal icons */
+.congrats-content .fas {
+    color: #488c2c;
+    font-size: 32px;
+    margin-bottom: 15px;
+}

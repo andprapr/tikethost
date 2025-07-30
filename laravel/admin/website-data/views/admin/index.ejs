@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Website Data Admin Panel</title>
+    <link rel="stylesheet" href="/admin/styles.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .page-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 2rem 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 0 0 0.5rem 0;
+        }
+        
+        .page-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+        
+        .card-header {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .card-body {
+            padding: 1.5rem;
+        }
+        
+        .customization-card .card-header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.2s;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%);
+            color: white;
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
+            color: white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .form-inline {
+            display: flex;
+            gap: 1rem;
+            align-items: end;
+            flex-wrap: wrap;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            min-width: 200px;
+        }
+        
+        .form-group label {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #495057;
+        }
+        
+        .form-control {
+            padding: 0.75rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102,126,234,.25);
+        }
+        
+        textarea.form-control {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-top: 1rem;
+        }
+        
+        th, td { 
+            padding: 12px; 
+            border: 1px solid #e9ecef; 
+            text-align: left;
+        }
+        
+        th {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            font-weight: 600;
+            color: #495057;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .alert {
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+        
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .alert-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .customization-section {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-top: 2rem;
+            overflow: hidden;
+        }
+        
+        .customization-header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 1.5rem;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .customization-content {
+            padding: 2rem;
+        }
+        
+        .settings-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .settings-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .category-section {
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+        
+        .category-header {
+            background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+            padding: 1rem 1.5rem;
+            font-weight: bold;
+            text-transform: capitalize;
+            border-bottom: 2px solid #dee2e6;
+        }
+        
+        .category-content {
+            padding: 1.5rem;
+        }
+        
+        .settings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .color-input {
+            width: 60px;
+            height: 40px;
+            padding: 0;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .setting-description {
+            font-size: 0.85rem;
+            color: #6c757d;
+            margin-top: 0.25rem;
+        }
+        
+        .preview-section {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 1.5rem;
+            position: sticky;
+            top: 20px;
+        }
+        
+        .preview-header {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: var(--header-text-color);
+            background-color: var(--header-background-color);
+            padding: 12px;
+            border-radius: 8px;
+        }
+        
+        .preview-content {
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .preview-button {
+            background-color: var(--button-background-color);
+            color: var(--button-text-color);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            margin: 10px 5px 0 0;
+            cursor: pointer;
+        }
+        
+        .preview-link {
+            color: var(--link-color);
+            text-decoration: underline;
+        }
+        
+        .preview-link:hover {
+            color: var(--link-hover-color);
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #6c757d;
+        }
+        
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title">🎛️ Website Data Admin Panel</h1>
+            <p class="page-subtitle">Manage your website content and customize appearance</p>
+        </div>
+
+        <!-- Success/Error Messages -->
+        <% if (typeof query !== 'undefined') { %>
+            <% if (query.success) { %>
+                <div class="alert alert-success">
+                    ✅ Settings updated successfully!
+                </div>
+            <% } %>
+            <% if (query.error) { %>
+                <div class="alert alert-error">
+                    ❌ Error updating settings. Please try again.
+                </div>
+            <% } %>
+            <% if (query.reset) { %>
+                <div class="alert alert-success">
+                    🔄 Settings reset to defaults successfully!
+                </div>
+            <% } %>
+        <% } %>
+
+        <div class="main-content">
+            <!-- Website Data Management -->
+            <div class="card">
+                <div class="card-header">
+                    📝 Add New Website Data
+                </div>
+                <div class="card-body">
+                    <form action="/admin/add" method="POST" class="form-inline">
+                        <div class="form-group">
+                            <label for="title">Title</label>
+                            <input type="text" id="title" name="title" class="form-control" placeholder="Enter title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="content">Content</label>
+                            <textarea id="content" name="content" class="form-control" placeholder="Enter content" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success">➕ Add New Data</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Website Data List -->
+            <div class="card">
+                <div class="card-header">
+                    📋 Website Data List
+                </div>
+                <div class="card-body">
+                    <% if (data.length > 0) { %>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Title</th>
+                                    <th>Content</th>
+                                    <th>Created At</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% data.forEach(item => { %>
+                                    <tr>
+                                        <td><%= item.id %></td>
+                                        <td><%= item.title %></td>
+                                        <td><%= item.content %></td>
+                                        <td><%= item.created_at %></td>
+                                    </tr>
+                                <% }); %>
+                            </tbody>
+                        </table>
+                    <% } else { %>
+                        <div class="empty-state">
+                            <div class="empty-state-icon">📭</div>
+                            <p>No website data found. Add some data using the form above.</p>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+
+        <!-- Website Customization Section -->
+        <div class="customization-section">
+            <div class="customization-header">
+                🎨 Website Customization
+            </div>
+            <div class="customization-content">
+                <form method="POST" action="/admin/customize">
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">💾 Save Customization</button>
+                        <button type="button" onclick="resetSettings()" class="btn btn-danger">🔄 Reset to Defaults</button>
+                    </div>
+
+                    <div class="settings-container">
+                        <div class="settings-form">
+                            <% Object.keys(settings).forEach(category => { %>
+                                <div class="category-section">
+                                    <div class="category-header">
+                                        <% if (category === 'appearance') { %>🎨<% } %>
+                                        <% if (category === 'typography') { %>📝<% } %>
+                                        <% if (category === 'general') { %>⚙️<% } %>
+                                        <%= category.charAt(0).toUpperCase() + category.slice(1) %> Settings
+                                    </div>
+                                    <div class="category-content">
+                                        <div class="settings-grid">
+                                            <% settings[category].forEach(setting => { %>
+                                                <div class="form-group">
+                                                    <label for="<%= setting.setting_name %>">
+                                                        <%= setting.setting_name.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) %>
+                                                    </label>
+                                                    
+                                                    <% if (setting.setting_type === 'color') { %>
+                                                        <div class="input-group">
+                                                            <input 
+                                                                type="color" 
+                                                                id="<%= setting.setting_name %>" 
+                                                                name="<%= setting.setting_name %>" 
+                                                                value="<%= setting.setting_value %>" 
+                                                                class="color-input"
+                                                                onchange="updatePreview()"
+                                                            >
+                                                            <input 
+                                                                type="text" 
+                                                                value="<%= setting.setting_value %>" 
+                                                                class="form-control" 
+                                                                style="flex: 1;"
+                                                                onchange="document.getElementById('<%= setting.setting_name %>').value = this.value; updatePreview()"
+                                                            >
+                                                        </div>
+                                                    <% } else if (setting.setting_type === 'number') { %>
+                                                        <input 
+                                                            type="number" 
+                                                            id="<%= setting.setting_name %>" 
+                                                            name="<%= setting.setting_name %>" 
+                                                            value="<%= setting.setting_value %>" 
+                                                            class="form-control"
+                                                            onchange="updatePreview()"
+                                                        >
+                                                    <% } else if (setting.setting_type === 'boolean') { %>
+                                                        <select 
+                                                            id="<%= setting.setting_name %>" 
+                                                            name="<%= setting.setting_name %>" 
+                                                            class="form-control"
+                                                            onchange="updatePreview()"
+                                                        >
+                                                            <option value="false" <%= setting.setting_value === 'false' ? 'selected' : '' %>>No</option>
+                                                            <option value="true" <%= setting.setting_value === 'true' ? 'selected' : '' %>>Yes</option>
+                                                        </select>
+                                                    <% } else { %>
+                                                        <input 
+                                                            type="text" 
+                                                            id="<%= setting.setting_name %>" 
+                                                            name="<%= setting.setting_name %>" 
+                                                            value="<%= setting.setting_value %>" 
+                                                            class="form-control"
+                                                            onchange="updatePreview()"
+                                                        >
+                                                    <% } %>
+                                                    
+                                                    <% if (setting.description) { %>
+                                                        <div class="setting-description"><%= setting.description %></div>
+                                                    <% } %>
+                                                </div>
+                                            <% }); %>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% }); %>
+                        </div>
+
+                        <div class="preview-section">
+                            <h3>🔍 Live Preview</h3>
+                            <div id="preview-container">
+                                <div class="preview-header" id="preview-header">
+                                    Website Header
+                                </div>
+                                <div class="preview-content" id="preview-content">
+                                    <p>This is a preview of how your website will look with the current customization settings.</p>
+                                    <p>You can see the background color, text color, and typography changes in real-time.</p>
+                                    <p>
+                                        <a href="#" class="preview-link">This is a sample link</a> - 
+                                        Links will appear in the color you've selected.
+                                    </p>
+                                    <div style="margin-top: 15px;">
+                                        <button class="preview-button">Primary Button</button>
+                                        <button class="preview-button" style="background-color: #6c757d;">Secondary Button</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reset confirmation form -->
+    <form id="resetForm" method="POST" action="/admin/customize/reset" style="display: none;">
+    </form>
+
+    <script>
+        function updatePreview() {
+            // Get current values
+            const backgroundColor = document.getElementById('background_color')?.value || '#ffffff';
+            const textColor = document.getElementById('text_color')?.value || '#333333';
+            const headerBackgroundColor = document.getElementById('header_background_color')?.value || '#f8f9fa';
+            const headerTextColor = document.getElementById('header_text_color')?.value || '#212529';
+            const buttonBackgroundColor = document.getElementById('button_background_color')?.value || '#007bff';
+            const buttonTextColor = document.getElementById('button_text_color')?.value || '#ffffff';
+            const linkColor = document.getElementById('link_color')?.value || '#007bff';
+            const fontFamily = document.getElementById('font_family')?.value || 'Arial, sans-serif';
+            const fontSize = document.getElementById('font_size')?.value || '16';
+
+            // Apply to preview
+            const previewContainer = document.getElementById('preview-container');
+            const previewHeader = document.getElementById('preview-header');
+            const previewContent = document.getElementById('preview-content');
+            const previewLinks = document.querySelectorAll('.preview-link');
+            const previewButtons = document.querySelectorAll('.preview-button');
+
+            if (previewContainer) {
+                previewContainer.style.backgroundColor = backgroundColor;
+                previewContainer.style.color = textColor;
+                previewContainer.style.fontFamily = fontFamily;
+                previewContainer.style.fontSize = fontSize + 'px';
+            }
+
+            if (previewHeader) {
+                previewHeader.style.backgroundColor = headerBackgroundColor;
+                previewHeader.style.color = headerTextColor;
+            }
+
+            previewLinks.forEach(link => {
+                link.style.color = linkColor;
+            });
+
+            previewButtons.forEach((button, index) => {
+                if (index === 0) { // Primary button
+                    button.style.backgroundColor = buttonBackgroundColor;
+                    button.style.color = buttonTextColor;
+                }
+            });
+
+            // Update color input text fields
+            document.querySelectorAll('input[type="color"]').forEach(colorInput => {
+                const textInput = colorInput.nextElementSibling;
+                if (textInput && textInput.type === 'text') {
+                    textInput.value = colorInput.value;
+                }
+            });
+        }
+
+        function resetSettings() {
+            if (confirm('Are you sure you want to reset all customization settings to their default values? This action cannot be undone.')) {
+                document.getElementById('resetForm').submit();
+            }
+        }
+
+        // Initialize preview on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updatePreview();
+        });
+
+        // Update preview when any input changes
+        document.addEventListener('input', updatePreview);
+        document.addEventListener('change', updatePreview);
+    </script>
+</body>
+</html>

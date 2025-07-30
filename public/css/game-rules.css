@@ -1,0 +1,41 @@
+/* Game Rules Image - Simple CSS-based visual representation */
+.game-rules-image {
+    width: 200px;
+    height: 150px;
+    background: linear-gradient(145deg, #488c2c 0%, #6ba942 50%, #4a7a2f 100%);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.game-rules-image::before {
+    content: '🎲';
+    font-size: 48px;
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    opacity: 0.7;
+}
+
+.game-rules-image::after {
+    content: '🎁';
+    font-size: 48px;
+    position: absolute;
+    bottom: 20px;
+    right: 30px;
+    opacity: 0.7;
+}
+
+.game-rules-text {
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    z-index: 1;
+}
