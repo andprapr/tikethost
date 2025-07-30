@@ -39,7 +39,7 @@
                         <i class="fas fa-palette mr-2 text-blue-600"></i>
                         Kustomisasi Website
                     </h2>
-                    <p class="text-sm text-gray-600 mt-1">Sesuaikan warna, tipografi, gambar latar belakang, dan pengaturan tampilan website</p>
+                    <p class="text-sm text-gray-600 mt-1">Sesuaikan warna, tipografi, gambar latar belakang, dan pengaturan tampilan website Kamu ya guys</p>
                     <div class="mt-3 p-3 bg-blue-50 border border-blue-200 rounded-lg">
                         <div class="flex items-start">
                             <i class="fas fa-info-circle text-blue-600 mt-0.5 mr-2"></i>
