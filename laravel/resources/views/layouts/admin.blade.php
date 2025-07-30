@@ -11,10 +11,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <!-- Scripts -->
-    <link href="https://dua.niemaggg.space/css/app.css" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/admin-images.css') }}" rel="stylesheet">
     <!-- Tailwind CSS Fallback -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://dua.niemaggg.space/js/app.js" defer></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/admin-dashboard.js') }}" defer></script>
     
     <style>
         body { 
