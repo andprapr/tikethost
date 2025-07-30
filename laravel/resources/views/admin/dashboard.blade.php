@@ -166,10 +166,10 @@
                         <td class="px-6 py-4 whitespace-nowrap">
                             @if($gift->image_path)
                                 <div class="relative">
-                                    <img src="{{ asset('storage/' . $gift->image_path) }}" 
+                                    <img src="{{ asset('../storage/' . $gift->image_path) }}" 
                                          alt="{{ $gift->nama_hadiah }}" 
                                          class="admin-image gift-table h-12 w-12 object-cover rounded-lg cursor-pointer"
-                                         onclick="viewImage('{{ asset('storage/' . $gift->image_path) }}', '{{ $gift->nama_hadiah }}')"
+                                         onclick="viewImage('{{ asset('../storage/' . $gift->image_path) }}', '{{ $gift->nama_hadiah }}')"
                                          onerror="handleImageError(this)"
                                          onload="handleImageLoad(this)">
                                     <div class="image-error-fallback h-12 w-12 bg-red-100 rounded-lg flex items-center justify-center" style="display: none;">
@@ -186,7 +186,7 @@
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $gift->created_at->format('d/m/Y H:i') }}</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                             <div class="flex space-x-2">
-                                <button onclick="viewGift({{ $gift->id }}, '{{ $gift->nama_hadiah }}', '{{ $gift->image_path ? asset('storage/' . $gift->image_path) : '' }}', '{{ $gift->created_at->format('d/m/Y H:i') }}')" 
+                                <button onclick="viewGift({{ $gift->id }}, '{{ $gift->nama_hadiah }}', '{{ $gift->image_path ? asset('../storage/' . $gift->image_path) : '' }}', '{{ $gift->created_at->format('d/m/Y H:i') }}')" 
                                         class="text-blue-600 hover:text-blue-900">
                                     <i class="fas fa-eye mr-1"></i>Lihat
                                 </button>

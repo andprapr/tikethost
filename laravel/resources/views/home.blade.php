@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $websiteSettings->website_title ?? 'Event Hoki Talas89' }}</title>
     @if($websiteSettings->favicon_path)
-        <link rel="icon" type="image/x-icon" href="{{ asset('storage/' . $websiteSettings->favicon_path) }}">
+        <link rel="icon" type="image/x-icon" href="{{ asset('../storage/' . $websiteSettings->favicon_path) }}">
     @endif
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="{{ url('/css/custom.css') }}">
@@ -1575,7 +1575,7 @@
         @endphp
         @if($websiteImage)
             <div class="website-image" style="text-align: center; margin-bottom: 20px;">
-                <img src="{{ asset('storage/' . $websiteImage) }}" alt="Website Image" style="max-width: 300px; max-height: 200px; width: auto; height: auto; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.3);">
+                <img src="{{ asset('../storage/' . $websiteImage) }}" alt="Website Image" style="max-width: 300px; max-height: 200px; width: auto; height: auto; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.3);">
             </div>
         @endif
         

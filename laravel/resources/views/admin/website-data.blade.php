@@ -71,7 +71,7 @@
                 @if($websiteSettings->favicon_path)
                     <div class="flex items-center space-x-3 mb-3">
                         <img 
-                            src="{{ asset('storage/' . $websiteSettings->favicon_path) }}" 
+                            src="{{ asset('../storage/' . $websiteSettings->favicon_path) }}" 
                             alt="Current Favicon" 
                             class="w-8 h-8 object-contain border border-gray-300 rounded"
                         >
@@ -419,7 +419,7 @@
                 <h4 class="text-sm font-medium text-gray-700 mb-2">Favicon:</h4>
                 <div class="bg-gray-50 p-3 rounded border flex items-center space-x-2">
                     <img 
-                        src="{{ asset('storage/' . $websiteSettings->favicon_path) }}" 
+                        src="{{ asset('../storage/' . $websiteSettings->favicon_path) }}" 
                         alt="Favicon Preview" 
                         class="w-6 h-6 object-contain"
                     >

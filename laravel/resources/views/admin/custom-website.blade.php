@@ -116,7 +116,7 @@
                                                                         Gambar saat ini:
                                                                     @endif
                                                                 </p>
-                                                                <img src="{{ asset('storage/' . $setting->setting_value) }}" 
+                                                                <img src="{{ asset('../storage/' . $setting->setting_value) }}" 
                                                                      alt="{{ $setting->setting_name === 'background_image' ? 'Background Image' : 'Website Image' }}" 
                                                                      class="mt-1 h-20 w-auto border border-gray-300 rounded">
                                                             </div>

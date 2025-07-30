@@ -146,7 +146,7 @@ html body::after {
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url('" . asset('storage/' . $backgroundImage) . "');
+  background-image: url('" . asset('../storage/' . $backgroundImage) . "');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
