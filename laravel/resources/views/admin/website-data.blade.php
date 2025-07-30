@@ -47,7 +47,7 @@
             <div class="space-y-2">
                 <label for="website_title" class="block text-sm font-medium text-gray-700">
                     <i class="fas fa-heading mr-1"></i>
-                    Judul Website
+                    Judul Websitemu
                 </label>
                 <input 
                     type="text" 
