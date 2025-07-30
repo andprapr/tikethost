@@ -165,10 +165,17 @@
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $gift->id }}</td>
                         <td class="px-6 py-4 whitespace-nowrap">
                             @if($gift->image_path)
-                                <img src="{{ asset('storage/' . $gift->image_path) }}" 
-                                     alt="{{ $gift->nama_hadiah }}" 
-                                     class="admin-image gift-table h-12 w-12 object-cover rounded-lg cursor-pointer"
-                                     onclick="viewImage('{{ asset('storage/' . $gift->image_path) }}', '{{ $gift->nama_hadiah }}')">
+                                <div class="relative">
+                                    <img src="{{ asset('storage/' . $gift->image_path) }}" 
+                                         alt="{{ $gift->nama_hadiah }}" 
+                                         class="admin-image gift-table h-12 w-12 object-cover rounded-lg cursor-pointer"
+                                         onclick="viewImage('{{ asset('storage/' . $gift->image_path) }}', '{{ $gift->nama_hadiah }}')"
+                                         onerror="handleImageError(this)"
+                                         onload="handleImageLoad(this)">
+                                    <div class="image-error-fallback h-12 w-12 bg-red-100 rounded-lg flex items-center justify-center" style="display: none;">
+                                        <i class="fas fa-exclamation-triangle text-red-500 text-xs" title="Gambar tidak dapat dimuat"></i>
+                                    </div>
+                                </div>
                             @else
                                 <div class="h-12 w-12 bg-gray-200 rounded-lg flex items-center justify-center">
                                     <i class="fas fa-image text-gray-400"></i>
@@ -179,7 +186,7 @@
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $gift->created_at->format('d/m/Y H:i') }}</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                             <div class="flex space-x-2">
-                                <button onclick="viewGift({{ $gift->id }}, '{{ $gift->nama_hadiah }}', '{{ asset('storage/' . $gift->image_path) }}', '{{ $gift->created_at->format('d/m/Y H:i') }}')" 
+                                <button onclick="viewGift({{ $gift->id }}, '{{ $gift->nama_hadiah }}', '{{ $gift->image_path ? asset('storage/' . $gift->image_path) : '' }}', '{{ $gift->created_at->format('d/m/Y H:i') }}')" 
                                         class="text-blue-600 hover:text-blue-900">
                                     <i class="fas fa-eye mr-1"></i>Lihat
                                 </button>
@@ -362,7 +369,10 @@
         </div>
         <div class="p-4">
             <div class="text-center">
-                <img id="viewImage" src="" alt="" class="w-24 h-24 object-cover rounded-lg mx-auto mb-3">
+                <img id="viewImage" src="" alt="" class="w-24 h-24 object-cover rounded-lg mx-auto mb-3" onerror="handleViewImageError(this)">
+                <div id="viewImageError" class="w-24 h-24 bg-red-100 rounded-lg mx-auto mb-3 flex items-center justify-center" style="display: none;">
+                    <i class="fas fa-exclamation-triangle text-red-500"></i>
+                </div>
                 <h4 id="viewName" class="text-lg font-semibold text-gray-800 mb-2"></h4>
                 <p id="viewDate" class="text-sm text-gray-600"></p>
             </div>
@@ -386,7 +396,13 @@
                 </button>
             </div>
             <div class="flex justify-center">
-                <img id="previewImage" src="" alt="" class="max-w-full max-h-80 object-contain rounded-lg">
+                <img id="previewImage" src="" alt="" class="max-w-full max-h-80 object-contain rounded-lg" onerror="handlePreviewImageError(this)">
+                <div id="previewImageError" class="max-w-full max-h-80 bg-red-100 rounded-lg flex items-center justify-center p-8" style="display: none;">
+                    <div class="text-center">
+                        <i class="fas fa-exclamation-triangle text-red-500 text-4xl mb-2"></i>
+                        <p class="text-red-600">Gambar tidak dapat dimuat</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -421,6 +437,33 @@
 <script>
 let currentGiftId = null;
 
+// Image error handling functions
+function handleImageError(img) {
+    img.style.display = 'none';
+    const fallback = img.nextElementSibling;
+    if (fallback && fallback.classList.contains('image-error-fallback')) {
+        fallback.style.display = 'flex';
+    }
+}
+
+function handleImageLoad(img) {
+    img.style.display = 'block';
+    const fallback = img.nextElementSibling;
+    if (fallback && fallback.classList.contains('image-error-fallback')) {
+        fallback.style.display = 'none';
+    }
+}
+
+function handleViewImageError(img) {
+    img.style.display = 'none';
+    document.getElementById('viewImageError').style.display = 'flex';
+}
+
+function handlePreviewImageError(img) {
+    img.style.display = 'none';
+    document.getElementById('previewImageError').style.display = 'flex';
+}
+
 // Open create modal
 function openCreateModal() {
     document.getElementById('modalTitle').textContent = 'Tambah Hadiah';
@@ -448,7 +491,18 @@ function editGift(id, name) {
 // View gift details
 function viewGift(id, name, imageSrc, date) {
     document.getElementById('viewName').textContent = name;
-    document.getElementById('viewImage').src = imageSrc;
+    const viewImage = document.getElementById('viewImage');
+    const viewImageError = document.getElementById('viewImageError');
+    
+    if (imageSrc) {
+        viewImage.src = imageSrc;
+        viewImage.style.display = 'block';
+        viewImageError.style.display = 'none';
+    } else {
+        viewImage.style.display = 'none';
+        viewImageError.style.display = 'flex';
+    }
+    
     document.getElementById('viewDate').textContent = 'Dibuat: ' + date;
     document.getElementById('viewModal').classList.remove('hidden');
     document.getElementById('viewModal').classList.add('flex');
@@ -457,7 +511,13 @@ function viewGift(id, name, imageSrc, date) {
 // View image in full size
 function viewImage(imageSrc, title) {
     document.getElementById('imageTitle').textContent = title;
-    document.getElementById('previewImage').src = imageSrc;
+    const previewImage = document.getElementById('previewImage');
+    const previewImageError = document.getElementById('previewImageError');
+    
+    previewImage.src = imageSrc;
+    previewImage.style.display = 'block';
+    previewImageError.style.display = 'none';
+    
     document.getElementById('imageModal').classList.remove('hidden');
     document.getElementById('imageModal').classList.add('flex');
 }
