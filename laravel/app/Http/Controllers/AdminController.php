@@ -738,7 +738,7 @@ class AdminController extends Controller
         
         // Update each setting
         foreach ($request->all() as $settingName => $settingValue) {
-            if ($settingName !== '_token' && $settingName !== 'website_image' && $settingName !== 'background_image' && $settingValue !== null) {
+            if ($settingName !== '_token' && $settingName !== 'website_image' && $settingName !== 'background_image' && $settingName !== 'site_title' && $settingValue !== null) {
                 WebsiteCustomization::setSetting($settingName, $settingValue);
             }
         }

@@ -29,7 +29,10 @@ class WebsiteCustomization extends Model
      */
     public static function getGroupedSettings()
     {
-        $settings = self::orderBy('category')->orderBy('setting_name')->get();
+        $settings = self::where('setting_name', '!=', 'site_title')
+                       ->orderBy('category')
+                       ->orderBy('setting_name')
+                       ->get();
         
         return $settings->groupBy('category');
     }
