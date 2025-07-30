@@ -167,7 +167,7 @@
                             @if($gift->image_path)
                                 <img src="{{ asset('storage/' . $gift->image_path) }}" 
                                      alt="{{ $gift->nama_hadiah }}" 
-                                     class="h-12 w-12 object-cover rounded-lg cursor-pointer"
+                                     class="admin-image gift-table h-12 w-12 object-cover rounded-lg cursor-pointer"
                                      onclick="viewImage('{{ asset('storage/' . $gift->image_path) }}', '{{ $gift->nama_hadiah }}')">
                             @else
                                 <div class="h-12 w-12 bg-gray-200 rounded-lg flex items-center justify-center">

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Storage Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-item { margin: 10px 0; padding: 10px; border: 1px solid #ccc; }
+        .success { background-color: #d4edda; border-color: #c3e6cb; }
+        .error { background-color: #f8d7da; border-color: #f5c6cb; }
+        img { width: 100px; height: 100px; object-fit: cover; margin: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Storage Access Test</h1>
+    
+    <div class="test-item">
+        <h3>Test 1: Storage Route</h3>
+        <img src="/storage/test-route.png" alt="Test Route" 
+             onload="this.parentElement.classList.add('success'); this.nextElementSibling.textContent='✅ Storage route berfungsi';"
+             onerror="this.parentElement.classList.add('error'); this.nextElementSibling.textContent='❌ Storage route gagal';">
+        <span>Loading...</span>
+    </div>
+    
+    <div class="test-item">
+        <h3>Test 2: Storage Gifts</h3>
+        <img src="/storage/gifts/test-gift.png" alt="Test Gift" 
+             onload="this.parentElement.classList.add('success'); this.nextElementSibling.textContent='✅ Storage gifts berfungsi';"
+             onerror="this.parentElement.classList.add('error'); this.nextElementSibling.textContent='❌ Storage gifts gagal';">
+        <span>Loading...</span>
+    </div>
+    
+    <div class="test-item">
+        <h3>Test 3: Default Image</h3>
+        <img src="/images/default-gift.png" alt="Default Gift" 
+             onload="this.parentElement.classList.add('success'); this.nextElementSibling.textContent='✅ Default image berfungsi';"
+             onerror="this.parentElement.classList.add('error'); this.nextElementSibling.textContent='❌ Default image gagal';">
+        <span>Loading...</span>
+    </div>
+    
+    <div class="test-item">
+        <h3>Test 4: Fallback Test</h3>
+        <img src="/storage/nonexistent-file.png" alt="Nonexistent" 
+             onload="this.parentElement.classList.add('success'); this.nextElementSibling.textContent='✅ Fallback berfungsi (menampilkan default)';"
+             onerror="this.parentElement.classList.add('error'); this.nextElementSibling.textContent='❌ Fallback gagal';">
+        <span>Loading...</span>
+    </div>
+    
+    <p><a href="/admin/dashboard">← Kembali ke Admin Dashboard</a></p>
+</body>
+</html>
