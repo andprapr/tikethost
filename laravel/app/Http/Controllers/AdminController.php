@@ -691,7 +691,7 @@ class AdminController extends Controller
             'website_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'font_family' => 'nullable|string|max:255',
             'font_size' => 'nullable|integer|min:8|max:72',
-            'site_title' => 'nullable|string|max:255',
+
             'enable_dark_mode' => 'nullable|in:true,false',
             'show_time_display' => 'nullable|in:true,false'
         ], [
