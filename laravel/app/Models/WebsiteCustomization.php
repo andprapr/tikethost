@@ -74,7 +74,7 @@ class WebsiteCustomization extends Model
             ['setting_name' => 'website_image', 'setting_value' => '', 'setting_type' => 'file', 'category' => 'appearance', 'description' => 'Website logo/image displayed above title'],
             ['setting_name' => 'font_family', 'setting_value' => 'Arial, sans-serif', 'setting_type' => 'text', 'category' => 'typography', 'description' => 'Primary font family'],
             ['setting_name' => 'font_size', 'setting_value' => '16', 'setting_type' => 'number', 'category' => 'typography', 'description' => 'Base font size in pixels'],
-            ['setting_name' => 'site_title', 'setting_value' => 'My Website', 'setting_type' => 'text', 'category' => 'general', 'description' => 'Website title'],
+
             ['setting_name' => 'enable_dark_mode', 'setting_value' => 'false', 'setting_type' => 'boolean', 'category' => 'general', 'description' => 'Enable dark mode toggle'],
             ['setting_name' => 'show_time_display', 'setting_value' => 'true', 'setting_type' => 'boolean', 'category' => 'general', 'description' => 'Show time display on homepage']
         ];
@@ -106,7 +106,7 @@ class WebsiteCustomization extends Model
             'website_image' => '',
             'font_family' => 'Arial, sans-serif',
             'font_size' => '16',
-            'site_title' => 'My Website',
+
             'enable_dark_mode' => 'false',
             'show_time_display' => 'true'
         ];
