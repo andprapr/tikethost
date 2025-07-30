@@ -45,6 +45,42 @@ Route::get('/js/{file}', function ($file) {
     ]);
 })->where('file', '.*');
 
+// Static asset routes for storage files
+Route::get('/storage/{path}', function ($path) {
+    $fullPath = storage_path('app/public/' . $path);
+    if (!file_exists($fullPath)) {
+        // Fallback to default gift image
+        $fallbackPath = public_path('images/default-gift.png');
+        if (file_exists($fallbackPath)) {
+            return response()->file($fallbackPath, [
+                'Content-Type' => 'image/png',
+                'Cache-Control' => 'public, max-age=3600',
+            ]);
+        }
+        abort(404);
+    }
+    
+    $mimeType = 'image/png';
+    $extension = strtolower(pathinfo($fullPath, PATHINFO_EXTENSION));
+    switch ($extension) {
+        case 'jpg':
+        case 'jpeg':
+            $mimeType = 'image/jpeg';
+            break;
+        case 'gif':
+            $mimeType = 'image/gif';
+            break;
+        case 'svg':
+            $mimeType = 'image/svg+xml';
+            break;
+    }
+    
+    return response()->file($fullPath, [
+        'Content-Type' => $mimeType,
+        'Cache-Control' => 'public, max-age=3600',
+    ]);
+})->where('path', '.*');
+
 // Static asset routes for images
 Route::get('/images/{file}', function ($file) {
     $path = public_path('images/' . $file);
